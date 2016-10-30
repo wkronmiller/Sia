@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t siad .
+docker build --no-cache -t siad .

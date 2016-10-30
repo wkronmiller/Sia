@@ -1,7 +1,7 @@
 FROM ubuntu:16.10
 
 # Allow API connections (INSECURE)
-EXPOSE 9980
+#EXPOSE 9980
 #TODO: do not expose 9980, use --link instead
 
 # Allow Connections to Cluster
