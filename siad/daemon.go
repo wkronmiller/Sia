@@ -96,11 +96,15 @@ func processConfig(config Config) (Config, error) {
 // startDaemon uses the config parameters to initialize Sia modules and start
 // siad.
 func startDaemon(config Config) (err error) {
+	// Attempt to load password from APIPASS environment variable.
+	config.APIPassword = os.Getenv("APIPASS")
 	// Prompt user for API password.
 	if config.Siad.AuthenticateAPI {
-		config.APIPassword, err = speakeasy.Ask("Enter API password: ")
-		if err != nil {
-			return err
+		if config.APIPassword == "" {
+			config.APIPassword, err = speakeasy.Ask("Enter API password: ")
+			if err != nil {
+				return err
+			}
 		}
 		if config.APIPassword == "" {
 			return errors.New("password cannot be blank")
